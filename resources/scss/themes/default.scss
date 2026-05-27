@@ -1,0 +1,415 @@
+// =============================================================================
+// filament-rekuest-theme — default variant
+//
+// Override stylesheet for Filament v5 panels.
+// Compiled by Vite to dist/themes/default.css and injected inline by the plugin.
+//
+//  ▸ Section 1  Brand color ramps    (50 → 950, light/dark per token)
+//  ▸ Section 2  Semantic tokens      (rk-*, defined per mode)
+//  ▸ Section 3  Layout & spacing     (mode-agnostic, no colors)
+//  ▸ Section 4  Surface components   (use rk-* tokens, mode-agnostic)
+//  ▸ Section 5  Sticky form-actions bar
+//  ▸ Section 6  Number inputs        (paired with resources/js/number-input.js)
+//
+// Light mode   -> :root (no class on <html>)
+// Dark mode    -> :root.dark
+// =============================================================================
+
+@use '../abstracts/mixins' as *;
+
+
+// -----------------------------------------------------------------------------
+// 1 · Brand color ramps
+// -----------------------------------------------------------------------------
+
+// Primary — brand blue ramp. Dark side mirrors the light ramp around index 500
+// so the perceived weight of `primary-N` stays the same across modes.
+@include token('--primary-50',  $light: #f4f6f9, $dark: #001520);
+@include token('--primary-100', $light: #d1dfe9, $dark: #002235);
+@include token('--primary-200', $light: #adc9da, $dark: #003149);
+@include token('--primary-300', $light: #8ab2cb, $dark: #1a4c66);
+@include token('--primary-400', $light: #699bbc, $dark: #336683);
+@include token('--primary-500', $light: #4d819f, $dark: #4d819f);
+@include token('--primary-600', $light: #336683, $dark: #699bbc);
+@include token('--primary-700', $light: #1a4c66, $dark: #8ab2cb);
+@include token('--primary-800', $light: #003149, $dark: #adc9da);
+@include token('--primary-900', $light: #002235, $dark: #d1dfe9);
+@include token('--primary-950', $light: #001520, $dark: #f4f6f9);
+
+// Info — Color::Info, base #4F819E (cooler step ramp from the primary family).
+@include token('--info-50',  $light: #f3f7fa, $dark: #07151f);
+@include token('--info-100', $light: #d8e5ed, $dark: #122638);
+@include token('--info-200', $light: #b9d0dc, $dark: #20384d);
+@include token('--info-300', $light: #9abacb, $dark: #305068);
+@include token('--info-400', $light: #75a3ba, $dark: #3f6883);
+@include token('--info-500', $light: #4f819e, $dark: #4f819e);
+@include token('--info-600', $light: #3f6883, $dark: #75a3ba);
+@include token('--info-700', $light: #305068, $dark: #9abacb);
+@include token('--info-800', $light: #20384d, $dark: #b9d0dc);
+@include token('--info-900', $light: #122638, $dark: #d8e5ed);
+@include token('--info-950', $light: #07151f, $dark: #f3f7fa);
+
+// Danger — Color::Danger, brand color anchored at index 600 (Filament uses
+// `bg-{color}-600` for button backgrounds, so 600 is the visible brand step).
+// Light/dark ramps are mirrored around index 500 to match primary/info.
+@include token('--danger-50',  $light: #fef2f2, $dark: #2e0708);
+@include token('--danger-100', $light: #fde0e1, $dark: #560d0f);
+@include token('--danger-200', $light: #fbc4c5, $dark: #7c1517);
+@include token('--danger-300', $light: #f49ba0, $dark: #a01b1d);
+@include token('--danger-400', $light: #ea696d, $dark: #c12326);
+@include token('--danger-500', $light: #d83a3d, $dark: #d83a3d);
+@include token('--danger-600', $light: #c12326, $dark: #ea696d);   // ← BASE
+@include token('--danger-700', $light: #a01b1d, $dark: #f49ba0);
+@include token('--danger-800', $light: #7c1517, $dark: #fbc4c5);
+@include token('--danger-900', $light: #560d0f, $dark: #fde0e1);
+@include token('--danger-950', $light: #2e0708, $dark: #fef2f2);
+
+// Success — Color::Success, brand color anchored at index 600.
+@include token('--success-50',  $light: #f3faf3, $dark: #142c12);
+@include token('--success-100', $light: #d7eed5, $dark: #275125);
+@include token('--success-200', $light: #afdfac, $dark: #3a6e34);
+@include token('--success-300', $light: #87cb83, $dark: #4c8a45);
+@include token('--success-400', $light: #6cb568, $dark: #5ba254);
+@include token('--success-500', $light: #67ae5e, $dark: #67ae5e);
+@include token('--success-600', $light: #5ba254, $dark: #6cb568);   // ← BASE
+@include token('--success-700', $light: #4c8a45, $dark: #87cb83);
+@include token('--success-800', $light: #3a6e34, $dark: #afdfac);
+@include token('--success-900', $light: #275125, $dark: #d7eed5);
+@include token('--success-950', $light: #142c12, $dark: #f3faf3);
+
+// Warning — Color::Warning, brand color anchored at index 600.
+@include token('--warning-50',  $light: #fdf7ed, $dark: #2d1f0a);
+@include token('--warning-100', $light: #f9e9c9, $dark: #5a3d13);
+@include token('--warning-200', $light: #f3d091, $dark: #855a1c);
+@include token('--warning-300', $light: #ebb55a, $dark: #ad7625);
+@include token('--warning-400', $light: #df9e3d, $dark: #d5922f);
+@include token('--warning-500', $light: #db9b37, $dark: #db9b37);
+@include token('--warning-600', $light: #d5922f, $dark: #df9e3d);   // ← BASE
+@include token('--warning-700', $light: #ad7625, $dark: #ebb55a);
+@include token('--warning-800', $light: #855a1c, $dark: #f3d091);
+@include token('--warning-900', $light: #5a3d13, $dark: #f9e9c9);
+@include token('--warning-950', $light: #2d1f0a, $dark: #fdf7ed);
+
+
+
+// -----------------------------------------------------------------------------
+// 2 · Semantic tokens
+//
+// The component rules in sections 4 and 5 reference these `--rk-*` variables
+// instead of raw color values, so light/dark theming is a matter of swapping
+// token definitions — never of duplicating selectors.
+// -----------------------------------------------------------------------------
+
+// Global tokens — mode-agnostic.
+:root {
+    --radius-xl: 0.3rem;
+    --radius-lg: 0.3rem;
+    --radius-sm: 0.3rem;
+}
+
+@include light {
+    // Shift the dark end of Filament's neutral gray ramp toward brand blue so
+    // body text, headings and labels inherit the primary palette. Light grays
+    // (50..200) are kept neutral so backgrounds / borders stay calm.
+    --gray-700: var(--primary-700);
+    --gray-800: var(--primary-800);
+    --gray-900: var(--primary-800);
+    --gray-950: #003149;
+
+    // Surfaces
+    --rk-page-bg:        #F0F4F8;
+    --rk-surface-bg:     var(--color-white);
+    --rk-surface-border: #e4e4e7;
+
+    // Page surface — scoped here (instead of mode-agnostic) so the rule wins
+    // against Filament's `dark:bg-gray-950` utility on body in the opposite
+    // mode by matching its specificity (0,2,1 vs 0,2,0).
+    body {
+        background-color: var(--rk-page-bg);
+    }
+
+    // Form controls
+    --rk-input-bg:     var(--color-white);
+    --rk-input-border: #e4e4e7;
+
+    // Typography accents
+    --rk-heading-color: var(--primary-500);
+    --rk-label-color:   var(--primary-400);
+
+    // Sticky form-actions bar
+    --rk-actions-bar-bg:     var(--color-white);
+    --rk-actions-bar-border: var(--gray-200);
+    --rk-actions-bar-shadow: 0 -1px 2px 0 rgb(0 0 0 / 0.04);
+}
+
+@include dark {
+    // Surfaces — neutral grays for cards/inputs (Filament's default convention),
+    // brand-blue tinted body so the dark UI still feels on-brand.
+    //
+    // Note: hardcoded #002235 instead of var(--primary-*) because the primary
+    // ramp is mirrored around index 500, so in dark `--primary-900` resolves to
+    // its light counterpart (#d1dfe9) — not the value we want here.
+    --rk-page-bg:        #1e2225;
+    --rk-surface-bg:     var(--gray-900);
+    --rk-surface-border: var(--gray-800);
+
+    // Form controls
+    --rk-input-bg:     var(--gray-900);
+    --rk-input-border: var(--gray-700);
+
+    // Typography accents — picked at the mirrored position on the primary ramp
+    // so the brand-blue text retains the same visual weight as in light mode.
+    --rk-heading-color: var(--primary-700);
+    --rk-label-color:   var(--primary-600);
+
+    // Sticky form-actions bar
+    --rk-actions-bar-bg:     var(--gray-900);
+    --rk-actions-bar-border: var(--gray-800);
+    --rk-actions-bar-shadow: 0 -1px 2px 0 rgb(0 0 0 / 0.4);
+
+    // Page surface — see comment in the light block above for why this rule
+    // lives inside the mode mixin rather than being mode-agnostic.
+    body {
+        background-color: var(--rk-page-bg);
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// 3 · Layout & spacing (mode-agnostic, no colors)
+// -----------------------------------------------------------------------------
+
+// Resource form pages — cap content width and center
+.fi-resource-edit-record-page,
+.fi-resource-create-record-page {
+    max-width:     1440px !important;
+    margin-inline: auto   !important;
+}
+
+// Page header spacing
+.fi-page-header-main-ctn {
+    row-gap:       calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 4);
+}
+
+// Page content vertical rhythm
+.fi-page-content {
+    row-gap: calc(var(--spacing) * 3);
+}
+
+.fi-sc.fi-sc-has-gap {
+    gap: calc(var(--spacing) * 3);
+}
+
+// Table cell — slightly more vertical breathing room
+.fi-ta-text:not(.fi-inline) {
+    padding-inline: calc(var(--spacing) * 1);
+    padding-block:  calc(var(--spacing) * 2);
+}
+
+// Reserve room at the bottom of the page so the last form field is never
+// hidden behind the sticky actions bar (bar height = 52px + safety).
+.fi-main {
+    padding-bottom: calc(var(--spacing) * 20);
+}
+
+@media (min-width: 64rem) {
+    .fi-main {
+        padding-inline: calc(var(--spacing) * 4);
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// 4 · Surface components (use rk-* tokens, mode-agnostic)
+//
+// Note: body background-color lives inside the @include light/dark blocks
+// above (Section 2) to win against Filament's dark:bg-gray-950 utility.
+// -----------------------------------------------------------------------------
+
+// Section heading typography accent
+.fi-section .fi-section-header-heading {
+    color: var(--rk-heading-color);
+}
+
+// Form field / infolist entry labels
+.fi-fo-field-label-content,
+.fi-in-entry-label {
+    color:       var(--rk-label-color)     !important;
+    font-size:   var(--text-xs)            !important;
+    font-weight: var(--font-weight-bold)   !important;
+}
+
+// Section / widget cards — flat, no shadow, no border
+.fi-section:not(.fi-section-not-contained):not(.fi-aside),
+.fi-wi-stats-overview-stat {
+    border-radius:    var(--radius-xl);
+    background-color: var(--rk-surface-bg);
+    border:           0    !important;
+    box-shadow:       none;
+    --tw-shadow:      none;
+    --tw-ring-shadow: none;
+    --tw-ring-color:  initial;
+}
+
+// Table container — flat
+.fi-ta-ctn {
+    box-shadow: none !important;
+    border:     0    !important;
+}
+
+// Filament action buttons (soft variant) — Filament composes them as
+// `fi-bg-color-400 fi-text-color-900` assuming a default Tailwind palette
+// where `-400` is pale. Our brand ramps have a more saturated `-400`, which
+// drops the perceived contrast on text-on-bg. We lighten the background to
+// `-200` (in light mode only — dark mode uses `-600` which is fine on its
+// near-white text).
+@include light {
+    .fi-ac-btn-action {
+        &.fi-color-primary {
+            background-color: var(--primary-200);
+
+            &:hover {
+                background-color: var(--primary-300);
+            }
+        }
+
+        &.fi-color-warning {
+            background-color: var(--warning-200);
+
+            &:hover {
+                background-color: var(--warning-300);
+            }
+        }
+    }
+}
+
+// Tabs container (uncontained variant) — flat, same surface treatment as cards
+.fi-tabs:not(.fi-contained) {
+    border-radius:    var(--radius-xl);
+    background-color: var(--rk-surface-bg);
+    padding:          calc(var(--spacing) * 2);
+    margin-inline:    auto;
+
+    border:           0 !important;
+    box-shadow:       none;
+    --tw-shadow:      none;
+    --tw-ring-shadow: none;
+    --tw-ring-color:  initial;
+}
+
+// Input wrapper
+.fi-input-wrp {
+    display:          flex;
+    background-color: var(--rk-input-bg);
+    border:           1px solid var(--rk-input-border);
+    box-shadow:       none;
+
+    --tw-shadow:      none;
+    --tw-ring-shadow: none;
+    --tw-ring-color:  none;
+    --tw-duration:    75ms;
+
+    // Tailwind v4's default transition-property list kept verbatim so input
+    // transitions match the surrounding utility-based components.
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration:        75ms;
+}
+
+// Schema "text" component — muted, italic
+.fi-sc-text {
+    font-style: italic;
+    color:      var(--gray-500);
+}
+
+
+// -----------------------------------------------------------------------------
+// 5 · Sticky form-actions bar
+//
+// Pins the save / cancel row to the bottom of the viewport. Colors come from
+// rk-actions-bar-* tokens so the bar follows the topbar in both modes.
+// -----------------------------------------------------------------------------
+
+#content\.form-actions {
+    position:     fixed;
+    inset-inline: 0;
+    bottom:       0;
+    z-index:      20;
+
+    display:     flex;
+    align-items: end;
+    height:      52px;
+
+    padding-block:  calc(var(--spacing) * 2);
+    padding-inline: calc(var(--spacing) * 5);
+
+    background-color: var(--rk-actions-bar-bg);
+    border-top:       1px solid var(--rk-actions-bar-border);
+    box-shadow:       var(--rk-actions-bar-shadow);
+}
+
+
+// -----------------------------------------------------------------------------
+// 6 · Number inputs
+//
+// CSS: right-aligned text, no spinner buttons (the up/down arrows).
+// JS : disabling wheel and ArrowUp/ArrowDown stepping lives in
+//      resources/js/number-input.js — mounted automatically by the plugin.
+// -----------------------------------------------------------------------------
+
+input[type="number"] {
+    text-align: right;
+    -moz-appearance: textfield;
+    appearance:      textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+
+
+//scrollbar
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    cursor: grab;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--rk-page-bg);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-500);
+
+}
+
+body {
+    /* width */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+        cursor: grab;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--rk-page-bg);
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-500);
+        border-radius: 10px;
+    }
+}

@@ -1,0 +1,41 @@
+// =============================================================================
+// filament-rekuest-theme — shared SCSS mixins
+// =============================================================================
+
+/// Emit declarations that apply only in light mode.
+/// Filament does not add a class for light mode (it's the default state),
+/// so we scope to :root:not(.dark) to win specificity against .dark rules.
+@mixin light {
+    :root:not(.dark) & {
+        @content;
+    }
+
+    @at-root :root:not(.dark) {
+        @content;
+    }
+}
+
+/// Emit declarations that apply only in dark mode.
+/// Filament toggles `.dark` on <html> when dark theme is active.
+@mixin dark {
+    :root.dark & {
+        @content;
+    }
+
+    @at-root :root.dark {
+        @content;
+    }
+}
+
+/// Define a CSS custom property pair for light and dark.
+/// Usage:
+///   @include token('--color-primary-500', $light: #f59e0b, $dark: #fbbf24);
+@mixin token($name, $light, $dark) {
+    :root {
+        #{$name}: #{$light};
+    }
+
+    :root.dark {
+        #{$name}: #{$dark};
+    }
+}
