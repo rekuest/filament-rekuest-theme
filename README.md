@@ -6,7 +6,7 @@
 
 # Filament Rekuest Theme
 
-> ⚠️ **Work in progress** — this package is still under active development. APIs, variants and tokens may change without notice until the first stable release. Use in production at your own risk.
+> ⚠️ **Work in progress** — this package is still under active development and may change without notice until the first stable release. Use in production at your own risk.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rekuest/filament-rekuest-theme.svg?style=flat-square)](https://packagist.org/packages/rekuest/filament-rekuest-theme)
 [![Total Downloads](https://img.shields.io/packagist/dt/rekuest/filament-rekuest-theme.svg?style=flat-square)](https://packagist.org/packages/rekuest/filament-rekuest-theme)
