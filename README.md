@@ -6,6 +6,8 @@
 
 # Filament Rekuest Theme
 
+> ⚠️ **Work in progress** — this package is still under active development. APIs, variants and tokens may change without notice until the first stable release. Use in production at your own risk.
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rekuest/filament-rekuest-theme.svg?style=flat-square)](https://packagist.org/packages/rekuest/filament-rekuest-theme)
 [![Total Downloads](https://img.shields.io/packagist/dt/rekuest/filament-rekuest-theme.svg?style=flat-square)](https://packagist.org/packages/rekuest/filament-rekuest-theme)
 [![License](https://img.shields.io/packagist/l/rekuest/filament-rekuest-theme.svg?style=flat-square)](LICENSE.md)
@@ -21,8 +23,6 @@ The package is opinionated about four things:
 - **Built for ERP / management software** — sticky form actions, right-aligned numeric inputs, predictable typography rhythm, accessible contrast ratios (WCAG AA+) on action buttons — the small structural defaults that distinguish a professional back-office from a generic dashboard.
 
 Ships with precompiled CSS + minified JS, injected inline by the plugin: no Tailwind build step, no asset-publish dance, no Node required in the host application.
-
-![Edit record page in light mode](docs/screenshot-edit.png)
 
 ## Features
 
